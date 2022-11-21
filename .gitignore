@@ -9,9 +9,9 @@
 .Ruserdata
 
 #Text and images
-.txt
-.pdf
-.svg
+*.txt
+*.pdf
+*.svg
 
 
 # Example code in package build process
