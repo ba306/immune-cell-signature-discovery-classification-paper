@@ -1,7 +1,7 @@
 # Immune cell type signature discovery and random forest classification for analysis of single cell gene expression datasets 
 Aybey et al.
 
-This git repository contains all the scripts to generate the figures and tables in our preprint.
+This git branch contains all the scripts to generate the figures and tables in our preprint before updating the workflow and extending the analysis for the review process.
 
 1. preprocess_scripts
 This folder includes preprocessing scripts to generate RDS files for single cell experiments.
