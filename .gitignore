@@ -5,9 +5,12 @@
 # Session Data files
 .RData
 .RDS
+.rds
 
 # User-specific files
 .Ruserdata
+.h5ad
+.qs
 
 # Models
 .pkl
