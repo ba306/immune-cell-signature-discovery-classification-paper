@@ -1,19 +1,19 @@
 # History files
-.Rhistory
-.Rapp.history
+*.Rhistory
+*.Rapp.history
 
 # Session Data files
-.RData
-.RDS
-.rds
+*.RData
+*.RDS
+*.rds
 
 # User-specific files
-.Ruserdata
-.h5ad
-.qs
+*.Ruserdata
+*.h5ad
+*.qs
 
 # Models
-.pkl
+*.pkl
 
 #Text and images
 
