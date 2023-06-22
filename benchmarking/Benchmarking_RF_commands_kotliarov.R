@@ -5,7 +5,6 @@
 library(parallel)  
 library(foreach)
 library(readxl)
-source("./functions/benchmarking_RF_training.R", local = TRUE, chdir = TRUE, keep.source = TRUE)
 set.seed(42)
 
 reference="./data/Hao/pbmc_hao_ref_up.qs"
@@ -133,7 +132,7 @@ cl <- makeCluster(num_cores)
 # Load required packages and functions on the worker nodes
 clusterEvalQ(cl, {
   library(Seurat)
-  source("./functions/benchmarking_RF_training_prediction_metrics.R", local = TRUE, chdir = TRUE, keep.source = TRUE)
+  source("./functions/benchmarking_RF_training.R", local = TRUE, chdir = TRUE, keep.source = TRUE)
   print <- function(x) { base::print(x) }
 })
 
