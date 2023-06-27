@@ -188,6 +188,89 @@ take= all_info_stats$method=="RF"
 
 rf_signatures_pred=all_info_stats[take,]
 rf_signatures_pred=na.omit(rf_signatures_pred)
+
+
+# Calculate score differences between our  gene sets and other gene sets
+# Get unique queries
+unique_queries <- unique(rf_signatures_pred$query)
+
+# Create an empty data frame to store the results
+diff_df <- data.frame(
+  query = character(),
+  geneset = character(),
+  sensitivity_diff = numeric(),
+  ppv_diff = numeric(),
+  npv_diff = numeric(),
+  specificity_diff = numeric(),
+  accuracy_diff = numeric(),
+  f1_score_diff = numeric(),
+  stringsAsFactors = FALSE
+)
+
+# Calculate differences for each query separately
+for (query in unique_queries) {
+  # Filter rows for the current query
+  query_rows <- rf_signatures_pred[rf_signatures_pred$query == query, ]
+  
+  # Calculate differences for "Our geneset" against other genesets
+  our_geneset_row <- query_rows[query_rows$geneset == "Our geneset", ]
+  other_geneset_rows <- query_rows[query_rows$geneset != "Our geneset", ]
+  
+  sensitivity_diff <- our_geneset_row$Sensitivity - other_geneset_rows$Sensitivity
+  ppv_diff <- our_geneset_row$PPV - other_geneset_rows$PPV
+  npv_diff <- our_geneset_row$NPV - other_geneset_rows$NPV
+  specificity_diff <- our_geneset_row$Specificity - other_geneset_rows$Specificity
+  accuracy_diff <- our_geneset_row$Accuracy - other_geneset_rows$Accuracy
+  f1_score_diff <- our_geneset_row$f1_score - other_geneset_rows$f1_score
+  
+  # Create a data frame with the differences for the current query
+  query_diff_df <- data.frame(
+    query = rep(query, length(sensitivity_diff)),
+    geneset = other_geneset_rows$geneset,
+    sensitivity_diff = sensitivity_diff,
+    ppv_diff = ppv_diff,
+    npv_diff = npv_diff,
+    specificity_diff = specificity_diff,
+    accuracy_diff = accuracy_diff,
+    f1_score_diff = f1_score_diff,
+    stringsAsFactors = FALSE
+  )
+  
+  # Append the data frame to the result
+  diff_df <- rbind(diff_df, query_diff_df)
+}
+
+# View the resulting differences
+diff_df
+
+# query      geneset            sensitivity_diff ppv_diff npv_diff specificity_diff accuracy_diff 
+# 1  Kotliarov        Abbas             8.23     4.86     0.99             1.44          1.83
+# 2  Kotliarov     Angelova             5.87     5.10     1.45             1.66          2.24
+# 3  Kotliarov  Charoentong             2.44     2.40     0.58             0.79          1.07
+# 4  Kotliarov        Nieto             4.32     3.14     0.92             1.04          1.37
+# 5  Kotliarov Random genes            39.99    33.70     6.39             6.45         10.09
+# 6      Zheng        Abbas            16.28     9.56     4.52             3.66          5.72
+# 7      Zheng     Angelova            14.55    17.83     5.40             5.61          7.41
+# 8      Zheng  Charoentong             8.01     5.26     2.07             2.96          3.57
+# 9      Zheng        Nieto            10.48     9.70     3.57             3.88          4.98
+# 10     Zheng Random genes            56.21    55.43    15.65            15.08         21.49
+
+# f1_score_diff
+# 1           6.54
+# 2           5.48
+# 3           2.42
+# 4           3.72
+# 5          36.97
+# 6          13.16
+# 7          16.17
+# 8           6.70
+# 9          10.10
+# 10         55.87
+
+diff_df %>%
+  filter(geneset=="Charoentong")
+
+# Create plots 
 rf_signatures_pred=melt(rf_signatures_pred)
 
 rf_signatures_pred$geneset <- factor(rf_signatures_pred$geneset, levels = published_signatures)
