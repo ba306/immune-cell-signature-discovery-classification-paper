@@ -131,6 +131,36 @@ take=   (all_info_stats$method=="singleR" & all_info_stats$geneset=="All") |
 all_methods=all_info_stats[take,]
 all_methods=na.omit(all_methods)
 
+all_methods
+# method ref     query     geneset no_genes
+# 2   CellTypist Hao Kotliarov     default     1068
+# 23  CellTypist Hao     Zheng     default     1078
+# 44      CHETAH Hao Kotliarov     default      200
+# 45      CHETAH Hao     Zheng     default      200
+# 51          RF Hao Kotliarov Our geneset      167
+# 57          RF Hao     Zheng Our geneset      163
+# 72      scType Hao Kotliarov        HVGs     2000
+# 92      scType Hao     Zheng        HVGs     2000
+# 113     Seurat Hao Kotliarov        HVGs     2000
+# 133     Seurat Hao     Zheng        HVGs     2000
+# 141    singleR Hao Kotliarov         All      All
+# 142    singleR Hao     Zheng         All      All
+# 
+# Sensitivity   PPV   NPV Specificity Accuracy f1_score
+# 2         69.29 67.15 73.81       72.51    72.35    68.20
+# 23        95.23 96.10 98.31       98.28    97.75    95.66
+# 44        62.34 55.23 72.08       70.37    69.56    58.57
+# 45        68.35 86.13 92.65       91.63    88.90    76.22
+# 51        67.68 65.41 73.65       72.38    72.12    66.53
+# 57        94.37 97.01 98.56       98.18    97.81    95.67
+# 72        72.75 68.67 83.08       83.41    80.65    70.65
+# 92        91.56 98.16 97.81       99.04    97.68    94.75
+# 113       70.95 68.31 74.03       72.68    72.70    69.60
+# 133       95.05 96.34 98.26       98.45    97.80    95.69
+# 141       68.73 63.96 73.45       72.02    71.73    66.26
+# 142       86.90 95.90 97.17       96.47    95.56    91.18
+
+
 all_methods=melt(all_methods)
 # Order the methods
 all_methods$method <- factor(all_methods$method, levels = methods)
