@@ -80,7 +80,6 @@ violin_celltype_dataperc=function(list_data,by="dataset"){
 #cut_clusters: cluster assignments- names gene sand values clusters
 # refinement filtering gives dataframe with gene names and clusters
 # sil_gene_threshold: silhouette score filter for genes
-# sil_cluster_threshold: silhouette score filter for clusters
 # min_no_gene= minimum genes for a cluster
 # max_no_gene= select top n number of genes for each cluster
 
@@ -89,7 +88,6 @@ violin_celltype_dataperc=function(list_data,by="dataset"){
 
 refinement_filtering=function(cut_clusters,
                               sil_gene_threshold,
-                              sil_cluster_threshold,
                               min_no_gene,
                               max_no_gene){
   
@@ -106,34 +104,10 @@ refinement_filtering=function(cut_clusters,
   
   ## silhoutte scores for genes less than 0 filtered out 
   cut_clusters_gene= cut_clusters[which(sil_cor_gene[,3]>sil_gene_threshold)]
-  
-  
-  
-  # Silhouette scores for  each cluster
-  
-  sil_cor_clust = correlations[names(cut_clusters_gene),names(cut_clusters_gene)] %>%
-    as.dist() %>%
-    silhouette(cut_clusters_gene,dist = .)
-  
-  rownames(sil_cor_clust) = names(cut_clusters_gene)
-  
-  #Cluster average silhoutte scores
-  sil_map_cluster= fviz_silhouette(sil_cor_clust)
-  
-  #av silhoutte less than 0 filter out
-  sil_cor_names=names(which(sil_map_cluster$plot_env$ave>sil_cluster_threshold))
-  
-  cut_clusters_filtered= cut_clusters_gene%>% 
-    subset(. %in%sil_cor_names)
-  
-  table(cut_clusters_filtered)
-  
-  
-  
-  
+
   ### Cluster filtering based on numbers in clusters
   
-  final_clusters_1= cut_clusters_filtered %>%
+  final_clusters_1= cut_clusters_gene %>%
     data.frame(cluster_gr=.) %>%
     subset(cluster_gr %in%  names(which(table(.)>=min_no_gene)))
   
