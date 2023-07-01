@@ -89,16 +89,15 @@ for(e in seq(0.15, 0.20, by = 0.005)){
 
   # Refining clusters and analysis
   # Refinement helper function with given parameters
-  # filter out negative silhouette scored- genes and clusters
+  # filter out negative silhouette scored- genes
   # take only clusters with min. 10 genes
   # take only max 50 top silhouette scored genes
   sil_gene_threshold=0
-  sil_cluster_threshold=0
   min_no_gene=10
   max_no_gene=50
   
   refined_df=refinement_filtering(cut_clusters,sil_gene_threshold,
-                                  sil_cluster_threshold,min_no_gene,max_no_gene    )
+                                  min_no_gene,max_no_gene    )
   
   ### Mean signature scores for each cell type
   
@@ -138,17 +137,14 @@ cut_clusters= cut_clusters[cut_clusters!=0]
 
 # Refinement helper function with given parameters
 sil_gene_threshold=0
-sil_cluster_threshold=0
 min_no_gene=10
 max_no_gene=50
 
 refined_df=refinement_filtering(cut_clusters,sil_gene_threshold,
-                                sil_cluster_threshold,min_no_gene,max_no_gene    )
+                                min_no_gene,max_no_gene    )
 # [1] "Pre-filtering"
 # [1] "No_cluster: 57; No_genes: 2737"
 # [1] "Gene-filtering"
-# [1] "No_cluster: 30; No_genes: 634"
-# [1] "Cluster-filtering"
 # [1] "No_cluster: 30; No_genes: 634"
 # [1] "Min gene-filtering"
 # [1] "No_cluster: 26; No_genes: 608"
