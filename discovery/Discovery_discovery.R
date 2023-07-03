@@ -113,7 +113,7 @@ for(e in seq(0.15, 0.20, by = 0.005)){
   all_plots=
     heatmap_meansig_scores_list(mean_celltypedf,
                                 row_name_mode = "cluster_gr",
-                                row_annot = F,ncol = 7)
+                                row_annot = F)
   
   
   combined_heatmap <- Reduce("+", all_plots)
