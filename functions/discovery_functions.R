@@ -144,15 +144,7 @@ refinement_filtering=function(cut_clusters,
   
   print(
     paste0("No_cluster: ",length(unique(cut_clusters_gene)),"; No_genes: ", length(cut_clusters_gene))
-  )
-  
-  print("Cluster-filtering")
-  
-  print(
-    paste0("No_cluster: ",length(unique(cut_clusters_filtered)),"; No_genes: ", 
-           length(cut_clusters_filtered))
-  )
-  
+  )  
   print("Min gene-filtering")
   
   print(
