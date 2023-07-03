@@ -95,7 +95,7 @@ refinement_filtering=function(cut_clusters,
     as.dist() %>%
     silhouette(cut_clusters,dist = .)
   
-  rownames(sil_cor_gene) = names(sil_cor_gene)
+  rownames(sil_cor_gene) = names(cut_clusters)
   
   #Cluster average silhoutte scores
   sil_map_gene= fviz_silhouette(sil_cor_gene)
@@ -119,7 +119,7 @@ refinement_filtering=function(cut_clusters,
       sub_sil= final_clusters_1 %>%
         subset(cluster_gr==more_clust[i]) %>%
         rownames(.) %>%
-        sil_cor_clust[.,]
+        sil_cor_gene[.,]
       
       exc_genes= sort(sub_sil[,3],decreasing = T)
       exc_genes= names(exc_genes)[51:length(exc_genes)]
@@ -127,9 +127,7 @@ refinement_filtering=function(cut_clusters,
       final_clusters_2= final_clusters_2[!rownames(final_clusters_2) %in% exc_genes,,drop=F]
     }
   }
-  table(final_clusters_1)
-  table(final_clusters_2)
-  
+
   final_clusters_2$cluster_gr=as.character(final_clusters_2$cluster_gr)
   final_clusters_2$genes=rownames(final_clusters_2)
   
