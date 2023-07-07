@@ -118,8 +118,8 @@ for(e in seq(0.15, 0.20, by = 0.01)){
   
   combined_heatmap <- Reduce("+", all_plots)
   
-  draw(combined_heatmap,heatmap_legend_side="top")
-  
+  draw(combined_heatmap,heatmap_legend_side="top",
+       column_title=e)  
 }
 dev.off()
 
