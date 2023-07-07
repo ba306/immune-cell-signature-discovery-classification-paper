@@ -75,7 +75,7 @@ abline(h = 0.3, lty = 2)
 # Epsilon 0.18 captured all cell types -> higher resolution
 
 pdf(paste0(dir,"epsilon_searchheatmap_15_20_by0_01_minpts10.pdf"),width = 30,height = 10)
-for(e in seq(0.15, 0.20, by = 0.005)){
+for(e in seq(0.15, 0.20, by = 0.01)){
   print(e)
   # DBSCAN
   db <- fpc::dbscan(um_1, eps = e, MinPts =10)
