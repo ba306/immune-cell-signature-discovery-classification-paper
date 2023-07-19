@@ -97,7 +97,7 @@ refined_df_max_median=read.table(paste0(dir,"dbscan_cluster_genes_param_0_annot.
 rownames(refined_df_max_median)=refined_df_max_median$genes
 
 # Exclude lineage signatures
-refined_df_max_median=refined_df_max_median[!refined_df_max_median$ID %in% 
+refined_df_max_median=refined_df_max_median[!refined_df_max_median$Annotation %in% 
                                               c("Myeloid cells",
                                                 "Lymphoid cells"),]
 #focus on our genes
@@ -162,6 +162,9 @@ remove=
   c(
     "S_6")
 refined_df_max_median=refined_df_max_median[!refined_df_max_median$ID %in% remove,]
+
+write.table(refined_df_max_median,
+  paste0(dir,"immdisc_aybey_final_list.tsv"),sep = "\t",row.names = F)
 
 # summarize the data frame by ID and Annotation, and combine the genes values separated by comma
 refined_df_max_median %>%
