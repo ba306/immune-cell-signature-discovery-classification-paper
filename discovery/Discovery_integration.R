@@ -7,7 +7,7 @@ library(qs)
 set.seed(42)
 
 # Data directory for discovery datasets
-data_dir="./data/TME/"
+data_dir="./data/TME_datasets/"
 
 # Analysis
 dir="./discovery/"
