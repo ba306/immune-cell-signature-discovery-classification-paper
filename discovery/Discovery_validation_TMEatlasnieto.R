@@ -13,7 +13,7 @@ dir="./discovery/"
 ######## Prepare validation dataset ########
 #read immune cell type atlas 
 # downloaded from https://zenodo.org/record/4263972
-sobj=readRDS("./data/TME/TICAtlas_RNA.rds")
+sobj=readRDS("./data/TME_datasets/TICAtlas_RNA.rds")
 
 # remove liver 2 and melonama 2 since we used those in the discovery datasets
 take=colnames(sobj)[!sobj$source %in%c("liver2","melanoma2")]
