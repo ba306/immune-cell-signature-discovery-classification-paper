@@ -23,6 +23,11 @@ Kartha IFN PBMC dataset
 - Discovery_validation_TMEatlasnieto.R: Validating our immune cell type signatures in TME immune cell atlas from Nieto et al.
 - Discovery_signature_comparison.R: Comparison of our immune cell type signatures with other published signatures
 
+## RF classifier
+
+You can run RF classifier using appropriate reference dataset, cell type signature genes and query dataset using Example_RF_classifier.R. 
+The output of this example is rf_Example_Hao_Zheng_ourgenes_163.csv. RF model is also saved into the directory designated as save_dir.
+
 ## Benchmarking
 
 Scripts stored to run different cell type prediction methods (CellTypist, random forest RF, scType, sinleR, CHETAH, and Seurat) in benchmarking datasets.
@@ -65,7 +70,9 @@ Compare DCs labeled by random forest vs scType, CellTypist and Seurat and show d
 - benchmarking_classifiers.R: Functions used in singleR, Seurat, CHETAH, and scType cell type classification
 - benchmarking_celltypist.py: Functions to classify in CellTypist
 - benchmarking_prediction_metrics.R: Functions to calculate cell type prediction metrics
+- RF_celltype_classifier.R: RF classifier function
 
+  
 ## Gene lists from published signatures
 
 Gene lists used in this study are stored in /gene_lists_papers.
